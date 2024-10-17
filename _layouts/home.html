@@ -1,0 +1,32 @@
+---
+layout: default
+---
+<div class="container main-content">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            {% for post in site.posts %}
+            <article class="post-card">
+                {% if post.cover_image %}
+                <div class="post-image">
+                    <img src="{{ post.cover_image | relative_url }}" alt="{{ post.title }}" class="img-fluid">
+                </div>
+                {% endif %}
+                <div class="post-date">
+                    <i class="far fa-clock"></i> {{ post.date | date: "%B %d, %Y" }}
+                </div>
+                <h2 class="post-title">
+                    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                </h2>
+                <div class="post-excerpt">
+                    {{ post.excerpt | strip_html | truncatewords: 50 }}
+                </div>
+                <div class="tags">
+                    {% for tag in post.tags %}
+                    <span class="tag">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</div>

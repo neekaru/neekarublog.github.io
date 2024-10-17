@@ -1,0 +1,46 @@
+name: Convert post.txt and post_blog.txt to Markdown
+
+on:
+  push:
+    paths:
+      - post.txt
+      - post_blog.txt  # Trigger action when post.txt or post_blog.txt is modified
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Convert post.txt to Markdown if exists
+      if: ${{ exists('post.txt') }}
+      run: node convertPost.js post.txt
+
+    - name: Convert post_blog.txt to Markdown if exists
+      if: ${{ exists('post_blog.txt') }}
+      run: node convertPost.js post_blog.txt
+
+    - name: Commit changes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add _posts/*.md _blog/*.md  # Add both _posts and _blog changes
+        git commit -m "Add new post(s) from post.txt or post_blog.txt"
+        git push origin main
+
+    - name: Remove post.txt and post_blog.txt
+      run: |
+        git rm post.txt || true  # Ignore errors if file doesn't exist
+        git rm post_blog.txt || true  # Ignore errors if file doesn't exist
+        git commit -m "Remove post.txt and/or post_blog.txt after conversion"
+        git push origin main

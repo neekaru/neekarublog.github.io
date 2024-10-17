@@ -1,0 +1,28 @@
+---
+layout: default
+---
+<div class="container main-content">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <article class="post-card single-post">
+                {% if page.cover_image %}
+                <div class="post-image">
+                    <img src="{{ page.cover_image | relative_url }}" alt="{{ page.title }}" class="img-fluid">
+                </div>
+                {% endif %}
+                <div class="post-date">
+                    <i class="far fa-clock"></i> {{ page.date | date: "%B %d, %Y" }}
+                </div>
+                <h1 class="post-title">{{ page.title }}</h1>
+                <div class="post-content">
+                    {{ content }}
+                </div>
+                <div class="tags">
+                    {% for tag in page.tags %}
+                    <span class="tag">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+            </article>
+        </div>
+    </div>
+</div>

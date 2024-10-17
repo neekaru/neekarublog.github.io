@@ -1,0 +1,16 @@
+title: Neekaru Home
+description: A vintage postcard style blog
+baseurl: ""
+url: ""
+permalink: /:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      
+markdown: kramdown
+plugins:
+  - jekyll-feed
