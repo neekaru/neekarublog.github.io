@@ -18,17 +18,15 @@ jobs:
       with:
         node-version: '16'
 
-    - name: Convert post.txt to Markdown if exists
-      if: ${{ contains(github.event.name, 'push') && contains(github.event.commits[0].added, 'post.txt') }}
-      run: node convertPost.js post.txt
-
-    - name: Commit changes
+    - name: Check if commit message have "post: "
+      if: contains(github.event.commits[0].message, 'post: ')
       run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        if [ -n "$(git ls-files -d _posts)" ]; then git add _posts; fi
-        git commit -m "Add new post(s) from post.txt"
-        git push origin main
+        if [ -f post.txt ]; then
+          node convertPost.js post.txt
+          git add _posts
+          git commit -m "Add new post(s) from post.txt"
+          git push origin main
+        fi
 
     - name: Remove post.txt
       run: |
