@@ -3,7 +3,7 @@ description: A vintage postcard style blog
 
 # Custom domain and URL settings
 url: "https://neekarublog.github.io"  # Base hostname and protocol for your site
-baseurl: "/neekarublog.github.io"      # Base URL (the repository name in this case)
+baseurl: "https://neekarublog.github.io"      # Base URL (the repository name in this case)
 
 # Permalink structure
 permalink: /:title/
