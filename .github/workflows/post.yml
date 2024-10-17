@@ -40,12 +40,14 @@ jobs:
 
       - name: Remove post.txt
         run: |
-          node convertPost.js post.txt
-          git add _posts
-          git commit -m "Add new post(s) from post.txt"
-          git rm post.txt || true  # Ignore errors if file doesn't exist
-          git commit -m "Remove post.txt after conversion"
-          git push origin main
+          if [ -f post.txt ]; then
+            node convertPost.js post.txt
+            git add _posts
+            git commit -m "Add new post(s) from post.txt"
+            git rm post.txt
+            git commit -m "Remove post.txt after conversion"
+            git push origin main
+          fi
 
   # Jekyll site build job
   jekyll_build:
