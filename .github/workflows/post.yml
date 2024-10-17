@@ -28,8 +28,8 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Check if commit message contains 'post: '
-        if: "contains(github.event.head_commit.message, 'post: ')"
+      - name: Check if commit message contains 'post:'
+        if: contains(github.event.head_commit.message, 'post:')
         run: |
           if [ -f post.txt ]; then
             node convertPost.js post.txt
