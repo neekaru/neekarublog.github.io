@@ -4,7 +4,10 @@ const path = require("path");
 // Helper function to convert content
 function convertContent(content) {
     // Convert ![img url] to <img src="url" />
-    content = content.replace(/!\[(https?:\/\/.*?)\]/g, '<br><img src="$1" />');
+    content = content.replace(
+        /!\[(https?:\/\/.*?)\]/g,
+        '<br><img src="$1" /><br>'
+    );
 
     // Convert (text)[link] to <a href="link">text</a>
     content = content.replace(/\((.*?)\)\[(.*?)\]/g, '<a href="$2">$1</a>');
@@ -12,7 +15,7 @@ function convertContent(content) {
     // Convert (description)![img url] to <img src="url" alt="description">
     content = content.replace(
         /\((.*?)\)!\[(.*?)\]/g,
-        '<br><img src="$2" alt="$1" />'
+        '<br><img src="$2" alt="$1" /><br>'
     );
 
     // Convert //text// to *text* for italics
