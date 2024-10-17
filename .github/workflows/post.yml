@@ -34,6 +34,7 @@ jobs:
             node convertPost.js post.txt
             git add _posts
             git commit -m "Add new post(s) from post.txt"
+            git add post.txt || true  # Ignore if post.txt doesn't exist
             git push origin main
           fi
         continue-on-error: true  # Continue even if an error occurs
@@ -44,7 +45,7 @@ jobs:
             node convertPost.js post.txt
             git add _posts
             git commit -m "Add new post(s) from post.txt"
-            git rm post.txt || true  # Ignore errors if file doesn't exist
+            git add post.txt || true  # Ignore if post.txt doesn't exist
             git commit -m "Remove post.txt after conversion"
             git push origin main
           fi
