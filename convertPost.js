@@ -21,6 +21,9 @@ function convertContent(content) {
     // Convert //text// to *text* for italics
     content = content.replace(/\/\/(.*?)\/\//g, "*$1*");
 
+    // Convert ##text## to **text** for bold
+    content = content.replace(/##(.*?)##/g, "**$1**");
+
     return content;
 }
 
