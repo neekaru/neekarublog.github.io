@@ -9,5 +9,3 @@ Hello, this is *italic text*. Here is an image <img src="https:*example.com/imag
 
 And an image with description (cool image)<img src="https://example.com/image.jpg" alt="image description" />
 a beautiful post in <img src="https://example.com/blog" alt="my blog" />
-
-can you see my ![https://example.com/blog]

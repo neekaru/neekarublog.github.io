@@ -19,17 +19,13 @@ jobs:
       with:
         node-version: '16'
 
-    - name: Install dependencies
-      run: npm install
-
     - name: Convert post.txt to Markdown if exists
-      if: ${{ exists('post.txt') }}
+      if: ${{ contains(github.event.name, 'push') && contains(github.event.commits[0].added, 'post.txt') }}
       run: node convertPost.js post.txt
 
     - name: Convert post_blog.txt to Markdown if exists
-      if: ${{ exists('post_blog.txt') }}
+      if: ${{ contains(github.event.name, 'push') && contains(github.event.commits[0].added, 'post_blog.txt') }}
       run: node convertPost.js post_blog.txt
-
     - name: Commit changes
       run: |
         git config --global user.name "github-actions[bot]"

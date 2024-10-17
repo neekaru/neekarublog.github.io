@@ -1,9 +1,0 @@
-title: A Wonderful Post
-author: sigma
-tag: thoughts
-content: Hello, this is //italic text//. Here is an image ![my image](https://example.com/image.jpg). Check this link (click here)[https://example.com].
-
-And an image with description (cool image)![image description](https://example.com/image.jpg)
-a beautiful post in ![my blog](https://example.com/blog)
-
-can you see my ![https://example.com/blog]
