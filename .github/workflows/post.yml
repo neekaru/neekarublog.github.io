@@ -45,8 +45,10 @@ jobs:
             git add _posts
             git commit -m "Add new post(s) from post.txt"
             git rm post.txt
-            git commit -m "Remove post.txt after conversion"
-            git push origin main
+            if [ -n "$(git status --porcelain)" ]; then
+              git commit -m "Remove post.txt after conversion"
+            fi
+            git push origin main --force
           fi
 
   # Jekyll site build job
