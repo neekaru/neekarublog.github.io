@@ -18,14 +18,14 @@ function convertContent(content) {
         '<img src="$2" alt="$1" />'
     );
 
-    // Convert //text// to *text* for italics, but ignore images and links
+    // Convert //text// to *text* for italics
     content = content.replace(/\/\/(.*?)\/\//g, "*$1*");
 
     return content;
 }
 
 // Main function to process the post
-function processPost(filename, outputDir) {
+function processPost(filename, outputDir = "_posts") {
     const filePath = path.join(__dirname, filename);
 
     fs.readFile(filePath, "utf8", (err, data) => {
@@ -35,25 +35,24 @@ function processPost(filename, outputDir) {
         }
 
         const lines = data.split("\n");
-        if (lines.length < 4) {
+        if (lines.length < 3) {
             console.error(
-                `${filename} must have at least 4 lines: title, author, tags, and content.`
+                `${filename} must have at least 3 lines: title, tags, and content.`
             );
             process.exit(1);
         }
 
         const title = lines[0].replace("title:", "").trim();
-        const author = lines[1].replace("author:", "").trim();
-        const tags = lines[2].replace("tag:", "").trim();
+        const tags = lines[1].replace("tag:", "").trim();
         const content = lines
-            .slice(3)
+            .slice(2)
             .join("\n")
             .replace("content:", "")
             .trim();
         const currentDate = new Date().toISOString().split("T")[0];
 
         const safeTitle = title.toLowerCase().replace(/\s+/g, "-");
-        const outputFilename = `${author}-${currentDate}-${safeTitle}.md`;
+        const outputFilename = `${currentDate}-${safeTitle}.md`;
 
         const tagsFormatted = tags
             ? `tags: [${tags
@@ -63,14 +62,7 @@ function processPost(filename, outputDir) {
             : "";
         const convertedContent = convertContent(content);
 
-        const jekyllFormatted = `---
-layout: post
-title: "${title}"
-author: "${author}"
-date: ${currentDate}
-${tagsFormatted}---
-${convertedContent}
-`;
+        const jekyllFormatted = `---\nlayout: post\ntitle: "${title}"\ndate: ${currentDate}\n${tagsFormatted}---\n${convertedContent}\n`;
 
         const outputPath = path.join(__dirname, outputDir, outputFilename);
 
@@ -94,9 +86,6 @@ ${convertedContent}
     });
 }
 
-// Determine which file to process and where to place the output
+// Determine which file to process and place output in _posts
 const postFile = process.argv[2] || "post.txt"; // Default to 'post.txt' if no file is provided
-const outputDir = postFile === "post_blog.txt" ? "_blog" : "_posts"; // Use '_blog' or '_posts'
-
-// Execute the processing function
-processPost(postFile, outputDir);
+processPost(postFile);
