@@ -42,15 +42,24 @@ function processPost(filename, outputDir = "_posts") {
             process.exit(1);
         }
 
+        // Extract title, tags, and optionally cover image from the lines
         const title = lines[0].replace("title:", "").trim();
         const tags = lines[1].replace("tag:", "").trim();
+
+        // Support optional cover image if provided in the second line or elsewhere
+        let coverImage = "";
+        if (lines[2].startsWith("cover_image:")) {
+            coverImage = lines[2].replace("cover_image:", "").trim();
+            lines.splice(2, 1); // Remove the cover image line from the array
+        }
+
         const content = lines
             .slice(2)
             .join("\n")
             .replace("content:", "")
             .trim();
-        const currentDate = new Date().toISOString().split("T")[0];
 
+        const currentDate = new Date().toISOString().split("T")[0];
         const safeTitle = title.toLowerCase().replace(/\s+/g, "-");
         const outputFilename = `${currentDate}-${safeTitle}.md`;
 
@@ -60,9 +69,14 @@ function processPost(filename, outputDir = "_posts") {
                   .map((tag) => tag.trim())
                   .join(", ")}]\n`
             : "";
+
+        const coverImageFormatted = coverImage
+            ? `cover_image: "${coverImage}"\n`
+            : "";
+
         const convertedContent = convertContent(content);
 
-        const jekyllFormatted = `---\nlayout: post\ntitle: "${title}"\ndate: ${currentDate}\n${tagsFormatted}---\n${convertedContent}\n`;
+        const jekyllFormatted = `---\nlayout: post\ntitle: "${title}"\ndate: ${currentDate}\n${tagsFormatted}${coverImageFormatted}---\n${convertedContent}\n`;
 
         const outputPath = path.join(__dirname, outputDir, outputFilename);
 
