@@ -25,7 +25,7 @@ function convertContent(content) {
     content = content.replace(/##(.*?)##/g, "**$1**");
 
     // convert ../text\.. for quote
-    content = content.replace(/\.\.\/(.*?)\\.\./, '> $1')
+    content = content.replace(/\.\.\/(.*?)\\.\./, '\n> $1')
 
     return content;
 }
