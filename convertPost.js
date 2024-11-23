@@ -5,7 +5,7 @@ const path = require("path");
 function convertContent(content) {
     // Convert ![img url] to <img src="url" />
     content = content.replace(
-        /!\[(https?:\/\/.*?)\]/g,
+        /!\[((?:https?:\/\/|http:\/\/).*?)\]/g,
         '<br><img src="$1" /><br>'
     );
 
