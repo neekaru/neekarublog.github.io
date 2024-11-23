@@ -24,6 +24,9 @@ function convertContent(content) {
     // Convert ##text## to **text** for bold
     content = content.replace(/##(.*?)##/g, "**$1**");
 
+    // convert ../text\.. for quote
+    content = content.replace(/\.\.\/(.*?)\\.\./, '> $1')
+
     return content;
 }
 
