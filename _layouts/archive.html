@@ -1,0 +1,30 @@
+---
+layout: default
+---
+<div class="container py-4">
+    <h1 class="display-4 mb-4">Archive</h1>
+    {% assign posts_by_year = site.posts | group_by_year: "date" | sort: 'name' | reverse %}
+    {% for year in posts_by_year %}
+    <div class="card mb-4">
+        <div class="card-header bg-dark text-white">
+            <h2 class="h4 mb-0">{{ year.name }}</h2>
+        </div>
+        <div class="card-body">
+            {% assign posts = year.items | group_by_month: "date" | sort: 'name' | reverse %}
+            {% for month in posts %}
+            <h3 class="h5 mt-3 mb-2">{{ month.name | date: "%B" }}</h3>
+            <ul class="list-unstyled">
+                {% for post in month.items %}
+                <li class="mb-2">
+                    <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
+                        <span class="text-muted me-2">{{ post.date | date: "%d" }}</span>
+                        {{ post.title }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
