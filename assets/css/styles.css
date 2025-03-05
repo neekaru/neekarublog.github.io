@@ -94,10 +94,10 @@ body.bg-dark > main > div > article:nth-child(n+1) > div > small:nth-child(2) > 
   color: #000 !important;
 }
 
-body > .navbar-brand {
+.navbar-brand {
   color: #fff !important;
 }
-body > .navbar-brand:hover {
+.navbar-brand:hover {
   text-decoration: none;
 }
 
