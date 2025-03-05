@@ -57,11 +57,13 @@ jobs:
     if: always()
     steps:
       - uses: actions/checkout@v4
-      - name: Build the site in the jekyll/builder container
+      - name: Build the site with specific Jekyll version
         run: |
-          docker run \
-          -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-          jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
+          export JEKYLL_VERSION=4.3.3
+          docker run --rm \
+            --volume="${{ github.workspace }}:/srv/jekyll:Z" \
+            jvconseil/jekyll-docker:$JEKYLL_VERSION \
+            jekyll build --future
 
   deploy:
     runs-on: ubuntu-latest
