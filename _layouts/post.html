@@ -5,9 +5,9 @@ layout: default
     <article class="bg-white p-4 border">
         <h1 class="display-4 mb-3">{{ page.title }}</h1>
         <div class="d-flex gap-3 text-muted mb-4">
-            <small><i class="bi bi-calendar"></i> {{ page.date | date: "%B %d, %Y" }}</small>
+            <small class="buat-calender"><i class="bi bi-calendar"></i> {{ page.date | date: "%B %d, %Y" }}</small>
             {% if page.tags %}
-            <small><i class="bi bi-tags"></i>
+            <small class="buat-tag"><i class="bi bi-tags"></i>
                 {% for tag in page.tags %}
                 <span class="badge bg-light text-dark">{{ tag }}</span>
                 {% endfor %}
