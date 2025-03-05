@@ -95,6 +95,10 @@ body.bg-dark {
   > main > div > article:nth-child(n+1) > p {
     color: #fff !important;
   }
+
+  > main > div > article:nth-child(n+1) > div > small:nth-child(1) {
+    color: #fff !important;
+  }
   
   > main > div > article:nth-child(n+1) > div > small:nth-child(2) {
     color: #fff !important;
@@ -104,6 +108,8 @@ body.bg-dark {
     color: #000 !important;
   }
 }
+
+body > 
 
 // Navbar brand styles
 .navbar-brand {

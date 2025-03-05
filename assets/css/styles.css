@@ -84,6 +84,9 @@ body.bg-dark .prose pre {
 body.bg-dark > main > div > article:nth-child(n+1) > p {
   color: #fff !important;
 }
+body.bg-dark > main > div > article:nth-child(n+1) > div > small:nth-child(1) {
+  color: #fff !important;
+}
 body.bg-dark > main > div > article:nth-child(n+1) > div > small:nth-child(2) {
   color: #fff !important;
 }
@@ -91,10 +94,10 @@ body.bg-dark > main > div > article:nth-child(n+1) > div > small:nth-child(2) > 
   color: #000 !important;
 }
 
-.navbar-brand {
+body > .navbar-brand {
   color: #fff !important;
 }
-.navbar-brand:hover {
+body > .navbar-brand:hover {
   text-decoration: none;
 }
 
