@@ -82,4 +82,33 @@ body.bg-dark .prose pre {
   background: #343a40;
 }
 
+[data-bs-theme=dark] {
+  background-color: #212529;
+}
+[data-bs-theme=dark] .bg-white {
+  background-color: #2b3035 !important;
+}
+[data-bs-theme=dark] .text-dark {
+  color: #fff !important;
+}
+[data-bs-theme=dark] .text-muted {
+  color: #e9ecef !important;
+}
+[data-bs-theme=dark] .border {
+  border-color: #373b3e !important;
+}
+[data-bs-theme=dark] .card {
+  background-color: #2b3035;
+}
+[data-bs-theme=dark] .prose pre {
+  background: #343a40;
+}
+
+.navbar-brand {
+  color: #fff !important;
+}
+.navbar-brand:hover {
+  text-decoration: none;
+}
+
 /*# sourceMappingURL=styles.css.map */
