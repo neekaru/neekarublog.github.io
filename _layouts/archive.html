@@ -3,16 +3,16 @@ layout: default
 ---
 <div class="container py-4">
     <h1 class="display-4 mb-4">Archive</h1>
-    {% assign posts_by_year = site.posts | group_by_year: "date" | sort: 'name' | reverse %}
-    {% for year in posts_by_year %}
+    {% assign postsByYear = site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
+    {% for year in postsByYear %}
     <div class="card mb-4">
         <div class="card-header bg-dark text-white">
             <h2 class="h4 mb-0">{{ year.name }}</h2>
         </div>
         <div class="card-body">
-            {% assign posts = year.items | group_by_month: "date" | sort: 'name' | reverse %}
-            {% for month in posts %}
-            <h3 class="h5 mt-3 mb-2">{{ month.name | date: "%B" }}</h3>
+            {% assign postsByMonth = year.items | group_by_exp:"post", "post.date | date: '%B'" %}
+            {% for month in postsByMonth %}
+            <h3 class="h5 mt-3 mb-2">{{ month.name }}</h3>
             <ul class="list-unstyled">
                 {% for post in month.items %}
                 <li class="mb-2">
