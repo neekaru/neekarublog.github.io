@@ -90,6 +90,10 @@ body.bg-dark > main > div > article:nth-child(n+1) > div > small:nth-child(1) {
 body.bg-dark > main > div > article:nth-child(n+1) > div > small:nth-child(2) {
   color: #fff !important;
 }
+body.bg-dark > main > div > div:nth-child(n+2) > div.card-body > h3,
+body.bg-dark > main > div > div:nth-child(n+2) > div.card-body > ul > li > a > span {
+  color: #fff !important;
+}
 body.bg-dark > main > div > article:nth-child(n+1) > div > small:nth-child(2) > span {
   color: #000 !important;
 }
