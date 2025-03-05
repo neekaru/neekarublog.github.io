@@ -82,26 +82,13 @@ body.bg-dark .prose pre {
   background: #343a40;
 }
 
-[data-bs-theme=dark] {
-  background-color: #212529;
-}
-[data-bs-theme=dark] .bg-white {
-  background-color: #2b3035 !important;
-}
-[data-bs-theme=dark] .text-dark {
+body.bg-dark > main > div > article:nth-child(n+1) > p,
+body.bg-dark > main > div > article:nth-child(2) > div > small:nth-child(n+1),
+body.bg-dark > main > div > article:nth-child(2) > div > small:nth-child(n+2) {
   color: #fff !important;
 }
-[data-bs-theme=dark] .text-muted {
-  color: #e9ecef !important;
-}
-[data-bs-theme=dark] .border {
-  border-color: #373b3e !important;
-}
-[data-bs-theme=dark] .card {
-  background-color: #2b3035;
-}
-[data-bs-theme=dark] .prose pre {
-  background: #343a40;
+body.bg-dark > main > div > article:nth-child(2) > div > small:nth-child(2) > span {
+  color: #000 !important;
 }
 
 .navbar-brand {
