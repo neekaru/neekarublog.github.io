@@ -91,20 +91,15 @@ body.bg-dark {
       background: #343a40;
     }
   }
-}
-
-
-body {
-  &.bg-dark {
-    > main > div > article:nth-child(n+1) > p,
-    > main > div > article:nth-child(2) > div > small:nth-child(n+1),
-    > main > div > article:nth-child(2) > div > small:nth-child(n+2) {
-      color: #fff !important;
-    }
-    
-    > main > div > article:nth-child(2) > div > small:nth-child(2) > span {
-      color: #000 !important;
-    }
+  
+  > main > div > article:nth-child(n+1) > p,
+  > main > div > article:nth-child(2) > div > small:nth-child(n+1),
+  > main > div > article:nth-child(2) > div > small:nth-child(n+2) {
+    color: #fff !important;
+  }
+  
+  > main > div > article:nth-child(2) > div > small:nth-child(2) > span {
+    color: #000 !important;
   }
 }
 
