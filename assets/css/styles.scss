@@ -92,13 +92,15 @@ body.bg-dark {
     }
   }
   
-  > main > div > article:nth-child(n+1) > p,
-  > main > div > article:nth-child(2) > div > small:nth-child(n+1),
-  > main > div > article:nth-child(2) > div > small:nth-child(n+2) {
+  > main > div > article:nth-child(n+1) > p {
     color: #fff !important;
   }
   
-  > main > div > article:nth-child(2) > div > small:nth-child(2) > span {
+  > main > div > article:nth-child(n+1) > div > small:nth-child(2) {
+    color: #fff !important;
+  }
+  
+  > main > div > article:nth-child(n+1) > div > small:nth-child(2) > span {
     color: #000 !important;
   }
 }

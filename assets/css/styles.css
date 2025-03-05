@@ -81,12 +81,13 @@ body.bg-dark .card {
 body.bg-dark .prose pre {
   background: #343a40;
 }
-body.bg-dark > main > div > article:nth-child(n+1) > p,
-body.bg-dark > main > div > article:nth-child(2) > div > small:nth-child(n+1),
-body.bg-dark > main > div > article:nth-child(2) > div > small:nth-child(n+2) {
+body.bg-dark > main > div > article:nth-child(n+1) > p {
   color: #fff !important;
 }
-body.bg-dark > main > div > article:nth-child(2) > div > small:nth-child(2) > span {
+body.bg-dark > main > div > article:nth-child(n+1) > div > small:nth-child(2) {
+  color: #fff !important;
+}
+body.bg-dark > main > div > article:nth-child(n+1) > div > small:nth-child(2) > span {
   color: #000 !important;
 }
 
