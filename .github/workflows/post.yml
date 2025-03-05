@@ -62,8 +62,11 @@ jobs:
           export JEKYLL_VERSION=4.3.3
           docker run --rm \
             --volume="${{ github.workspace }}:/srv/jekyll:Z" \
+            --volume="${{ github.workspace }}/vendor/bundle:/usr/local/bundle:Z" \
+            -e JEKYLL_UID=$(id -u) \
+            -e JEKYLL_GID=$(id -g) \
             jvconseil/jekyll-docker:$JEKYLL_VERSION \
-            jekyll build --future
+            sh -c "chown -R jekyll:jekyll /srv/jekyll && jekyll build --future"
 
   deploy:
     runs-on: ubuntu-latest
