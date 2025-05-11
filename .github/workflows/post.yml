@@ -7,14 +7,14 @@ on:
     paths:
       - post.txt
   workflow_dispatch:
-  
+
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
 jobs:
-  build:
+  convert:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -36,63 +36,47 @@ jobs:
       - name: Process post.txt and commit changes
         run: |
           if [ -f post.txt ]; then
-            # Convert post.txt to markdown
             node convertPost.js post.txt
-            
-            # Stage the new posts
+
             git add _posts/
             git commit -m "Add new post(s) from post.txt" || true
-            
-            # Remove and commit post.txt
+
             git rm post.txt
             git commit -m "Remove post.txt after conversion" || true
-            
-            # Push all changes
+
             git push origin main
           fi
 
-  jekyll_build:
-    runs-on: ubuntu-latest
-    needs: build
-    if: always()
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build the site with specific Jekyll version
-        run: |
-          export JEKYLL_VERSION=4.3.3
-          docker run --rm \
-            --volume="${{ github.workspace }}:/srv/jekyll:Z" \
-            --volume="${{ github.workspace }}/vendor/bundle:/usr/local/bundle:Z" \
-            -e JEKYLL_UID=$(id -u) \
-            -e JEKYLL_GID=$(id -g) \
-            jvconseil/jekyll-docker:$JEKYLL_VERSION \
-            sh -c "chown -R jekyll:jekyll /srv/jekyll && jekyll build --future"
-
   deploy:
     runs-on: ubuntu-latest
-    needs: jekyll_build
-    if: always()
+    needs: convert
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Ruby
+      - name: Setup Ruby and Bundler
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1'
-          bundler-cache: false
+          bundler-cache: true
 
-      - name: Setup Pages
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Configure GitHub Pages
         id: pages
         uses: actions/configure-pages@v5
 
-      - name: Build with Jekyll
+      - name: Build site with Jekyll
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
 
   deploy_pages:
     environment:
