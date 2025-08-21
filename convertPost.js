@@ -3,20 +3,29 @@ const path = require("path");
 
 // Helper function to convert content
 function convertContent(content) {
-    // Convert ![img url] to <img src="url" />
-    content = content.replace(
-        /!\[((?:https?:\/\/|http:\/\/).*?)\]/g,
-        '<br><img src="$1" /><br>'
-    );
+    // Convert (description)![img path] to <img src="path" alt="description">
+    // Accept absolute URLs, root paths (/...), and relative paths (including assets/...)
+    content = content.replace(/\((.*?)\)!\[([^\]]+)\]/g, function (m, desc, src) {
+        src = src.trim();
+        // Normalize asset shorthand: assets/... -> /assets/...
+        if (!/^(?:https?:\/\/|\/)/i.test(src) && src.startsWith('assets/')) {
+            src = '/' + src;
+        }
+        return '<br><img src="' + src + '" alt="' + desc + '" /><br>';
+    });
+
+    // Convert ![img path] to <img src="path" />
+    // Accept absolute URLs, root paths (/...), and relative paths (including assets/...)
+    content = content.replace(/!\[([^\]]+)\]/g, function (m, src) {
+        src = src.trim();
+        if (!/^(?:https?:\/\/|\/)/i.test(src) && src.startsWith('assets/')) {
+            src = '/' + src;
+        }
+        return '<br><img src="' + src + '" /><br>';
+    });
 
     // Convert (text)[link] to <a href="link">text</a>
     content = content.replace(/\((.*?)\)\[(.*?)\]/g, '<a href="$2">$1</a>');
-
-    // Convert (description)![img url] to <img src="url" alt="description">
-    content = content.replace(
-        /\((.*?)\)!\[(.*?)\]/g,
-        '<br><img src="$2" alt="$1" /><br>'
-    );
 
     // Convert //text// to *text* for italics
     content = content.replace(/\/\/(.*?)\/\//g, "*$1*");
