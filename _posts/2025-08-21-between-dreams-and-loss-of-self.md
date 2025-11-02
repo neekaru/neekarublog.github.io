@@ -3,7 +3,7 @@ layout: post
 title: "Between Dreams and Loss of Self"
 date: 2025-08-21
 tags: [myself, mental health]
-cover_image: "/assets/img/post/Dream_Lost.png"
+cover_image: "https://raw.githubusercontent.com/neekaru/neekarublog.github.io/main/assets/img/post/Dream_Lost.png"
 ---
 **I Remeber** Correctly sometimes around july or august, the problem is right now, i'm not enjoying with the current management, because i realize they actually not supporting and be like somebody that i dosen't want to
 
